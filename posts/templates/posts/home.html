@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<h1>This is the home page of nowhere</h1>
+<a href ="{% url 'posts:create' %}" class="btn btn-primary">New Post</a>
+
+<br>
+<br>
+
+
+{% for post in posts.all %}
+<div class="col-sm-7" style="border-bottom:1px solid lightgrey;" >
+<table >
+  <tr>
+    <td style="padding-right:20px;">
+      <br>
+      <form method="POST" action="{% url 'posts:upvote' post.id %}" >
+      {% csrf_token %}
+    <button type="submit" class="btn btn-primary"  style="background-color:grey;"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></button>
+  </form><br> <p class="text-center">{{post.votes_total}}</p> <br><form method="POST" action="{% url 'posts:downvote' post.id %}" >
+      {% csrf_token %}
+    <button type="submit" class="btn btn-primary" style="background-color:grey;"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></button>
+    </form>
+    <br>
+  </td>
+    <td><a href="{{post.url}}">{{post.title}}</a><br>{{post.pub_date}} by
+    <a href="{% url 'userposts'  %}">{{post.author.username}} </a></td>
+  </tr>
+</table>
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

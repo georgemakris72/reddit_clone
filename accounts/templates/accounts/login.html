@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+<h1>Login</h1>
+
+{% if error %}
+{{ error }}
+<br><br>
+{% endif %}
+
+<!-- Using accounts:login because set ap_name=accounts so now must reference that.
+Did this to avoid confusion in case we have multiple views with same name in different apps -->
+<form method="POST" action="{% url 'accounts:login' %}">
+  {% csrf_token %}
+
+{% if request.GET.next %}
+<input type="hidden" name="next" value="{{ request.GET.next }}" />
+
+{% endif %}
+
+<!-- The hidden field is for purposes of redirecting once user is logged in -->
+
+Username:
+<br>
+  <input type='text' name='username' />
+  <br>
+  Password:
+  <br>
+  <input type='password' name='password' />
+  <br>
+  <br>
+  <input type='submit' class="btn btn-primary" value='Login'/>
+</form>
+{% endblock %}

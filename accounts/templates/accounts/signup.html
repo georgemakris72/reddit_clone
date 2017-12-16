@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+
+<h1>Sign up!</h1>
+
+{% if error %}
+{{ error }}
+<br><br>
+{% endif %}
+
+<!-- Using accounts:signup because set ap_name=accounts so now must reference that.
+Did this to avoid confusion in case we have multiple views with same name in different apps -->
+<form method="POST" action="{% url 'accounts:signup' %}">
+  {% csrf_token %}
+Username:
+<br>
+  <input type='text' name='username' />
+  <br>
+  Password:
+  <br>
+  <input type='password' name='password1' />
+  <br>
+  Confirm Password:
+  <br>
+  <input type='password' name='password2' />
+  <br><br>
+  <input type='submit' class="btn btn-primary" value='Sign up!'/>
+</form>
+{% endblock %}

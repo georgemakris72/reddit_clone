@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>New Post</h1>
+
+{% if error %}
+{{ error }}
+<br><br>
+{% endif %}
+
+<!-- Using accounts:login because set ap_name=accounts so now must reference that.
+Did this to avoid confusion in case we have multiple views with same name in different apps -->
+<form method="POST" action="{% url 'posts:create' %}">
+  {% csrf_token %}
+
+
+<!-- The hidden field is for purposes of redirecting once user is logged in -->
+
+Title:
+<br>
+  <input type='text' name='title' />
+  <br>
+  URL:
+  <br>
+  <input type='text' name='url' />
+  <br>
+  <br>
+  <input type='submit' class="btn btn-primary" value='Post'/>
+</form>
+{% endblock %}
