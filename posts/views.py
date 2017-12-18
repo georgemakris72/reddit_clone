@@ -32,8 +32,13 @@ def home(request):
     return render(request, 'posts/home.html', {'posts':posts})
 
 def userposts(request):
-    posts=Post.objects.filter(author=request.author.id).order_by('-votes_total')
-    return render(request, 'posts/home.html', {'posts':posts})
+    # posts=Post.objects.filter(author=request.user.id).order_by('-votes_total')
+    author = request.POST.get('author')
+    posts=Post.objects.filter(author__username=author).order_by('-votes_total')
+    z=[posts[0]] #need to make it a list in order for it to be iterable
+    print(z)
+    return render(request, 'posts/userposts.html', {'posts':posts, 'z':z})
+    # return render(request, 'posts/userposts.html', {'posts':posts,'z':z})
 
 
 

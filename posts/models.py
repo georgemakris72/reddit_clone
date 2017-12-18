@@ -7,3 +7,6 @@ class Post(models.Model):
     pub_date=models.DateTimeField()
     author=models.ForeignKey(User)
     votes_total=models.IntegerField(default=1)
+
+    # def __str__(self):
+    #     return self.author

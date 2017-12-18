@@ -2,12 +2,23 @@
 
 {% block content %}
 <div class="container">
-<h1>This is the home page of nowhere</h1>
-<a href ="{% url 'posts:create' %}" class="btn btn-primary">New Post</a>
 
-<br>
-<br>
+<!-- {% for post in posts %}
+{% if forloop.first %}
+<h1>These are all the posts from {{post.author.username}}</h1>
+{% endif %} -->
+<!-- <h1>These are all the posts from bob {{post.author.username}}</h1>
+{% endfor %}
+<br> -->
 
+<!-- Below method is better since it doesn't unnecessarily make it go through for loop more than necessary.  But above method good for reference of technique if for loop.first -->
+
+{% for item in z %}
+
+<h1>These are all the posts from {{item.author.username}}</h1>
+
+{% endfor %}
+<br>
 
 {% for post in posts.all %}
 <div class="col-sm-7" style="border-bottom:1px solid lightgrey;" >
@@ -25,12 +36,7 @@
     <br>
   </td>
     <td><a href="{{post.url}}">{{post.title}}</a><br>{{post.pub_date}} by
-  <form method="POST" action="{% url 'userposts' %}" style='display:inline;'>
-    {% csrf_token %}
-  <button type="submit" name='author' value="{{ post.author.username }}" class="btn btn-link" style='padding:0; vertical-align:inherit;'>{{post.author.username}} </button>
-  <!-- <input type="hidden" name="author" value="{{ post.author.username }}" /> -->
-</form>
-  </td>
+    <a href="{% url 'userposts'  %}">{{post.author.username}} </a></td>
   </tr>
 </table>
 </div>
@@ -38,5 +44,3 @@
 
 </div>
 {% endblock %}
-<!-- <td><a href="{{post.url}}">{{post.title}}</a><br>{{post.pub_date}} by
-<a href="{% url 'userposts'  %}">{{post.author.username}} </a></td> -->

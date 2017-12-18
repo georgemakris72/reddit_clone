@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^posts/', include('posts.urls')),
     url(r'^$', views.home, name='home'),
     url(r'^userposts$', views.userposts, name='userposts'),
+    # url(r'^user/(?P<pk>[0-9]+)', views.userposts, name='userposts'),
 ]
